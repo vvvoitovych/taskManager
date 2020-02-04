@@ -1,0 +1,49 @@
+
+<div class="container">
+  <div>
+    <div class="form" *ngIf="changeForm">
+      <form action="">
+        <div class="form-change">
+          <input type="text"
+                 placeholder="task name"
+
+          >
+        </div>
+        <div class="form-change">
+          <input type="text"
+                 placeholder="description"
+
+          >
+        </div>
+        <div class="form-change">
+          <button class="makeTask" type="submit"
+          >change task</button>
+        </div>
+      </form>
+    </div>
+    <div class="tasks" *ngFor="let tasks of task1">
+
+
+      <div class="id border background">
+        <span>ID: {{tasks.id}}
+        </span>
+      </div>
+      <div class="name border background">
+        <span>Name: {{tasks.taskName}}
+        </span>
+      </div>
+      <div class="description border background">
+        <span>Description: {{tasks.description}}
+        </span>
+      </div>
+      <div class="buttons border background">
+      <button class="btn btn-warning margin" (click)="onChange()">change</button>
+      <button class="btn btn-danger margin" (click)="onDelete(tasks)">delete</button>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>
