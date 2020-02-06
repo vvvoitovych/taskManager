@@ -8,5 +8,13 @@
     <button class="btn btn-primary" (click)="logOut()">Log Out</button>
   </div>
 </header>
-<app-form></app-form>
-<app-tasks></app-tasks>
+
+<app-form
+  (onCreate)="createTask($event)">
+</app-form>
+
+<app-tasks
+  [tasks]="tasks"
+  (onUpdate)="updateTask($event)"
+  (onDelete)="removeTask($event)"
+></app-tasks>

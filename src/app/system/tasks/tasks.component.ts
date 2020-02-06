@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { TaskService } from "../../services/task.service";
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Task } from "../../models/task.model";
 
 @Component({
@@ -7,31 +6,46 @@ import { Task } from "../../models/task.model";
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent {
+
+  @Input()
+  public tasks: Array<Task> = [];
 
   @Output()
-  task1: Task;
-  changeForm = false;
+  public onDelete: EventEmitter<Task> = new EventEmitter();
 
-  constructor(private taskService: TaskService) { }
+  @Output()
+  public onUpdate: EventEmitter<Task> = new EventEmitter();
 
-  ngOnInit() {
-    this.taskService.getTasks()
-      .subscribe((task: Task) => {
-        this.task1 = task
-      });
+  public modalOpened = false;
 
+  public selectedTask: Task = {name: '', description: ''};
+
+  constructor() { }
+
+
+  openChange(task: Task) {
+    this.openModal();
+    this.selectedTask = {...task}
   }
-  onDelete(task1: Task) {
-    this.taskService.deleteTask(task1)
-      .subscribe((data) => {
-        this.taskService.getTasks()
-          .subscribe((task: Task) => {
-            this.task1 = task
-          });
-      });
+
+  public remove(task: Task): void {
+    this.onDelete.emit(task);
   }
-  onChange() {
-    this.changeForm = !this.changeForm;
+
+  public create(): void {
+    if (this.selectedTask.name.trim() && this.selectedTask.description.trim()) {
+      this.onUpdate.emit(this.selectedTask)
+      this.closeModal();
+    }
+  }
+
+  public closeModal(): void {
+    this.modalOpened = false;
+    this.selectedTask = {name: '', description: ''};
+  }
+
+  public openModal(): void {
+    this.modalOpened = true;
   }
 }

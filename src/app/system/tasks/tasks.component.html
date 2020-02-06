@@ -1,49 +1,51 @@
 
+<script src="../form/form.component.ts"></script>
 <div class="container">
   <div>
-    <div class="form" *ngIf="changeForm">
-      <form action="">
-        <div class="form-change">
-          <input type="text"
-                 placeholder="task name"
-
-          >
-        </div>
-        <div class="form-change">
-          <input type="text"
-                 placeholder="description"
-
-          >
-        </div>
-        <div class="form-change">
-          <button class="makeTask" type="submit"
-          >change task</button>
-        </div>
-      </form>
-    </div>
-    <div class="tasks" *ngFor="let tasks of task1">
-
-
+    <div class="tasks" *ngFor="let task of tasks">
       <div class="id border background">
-        <span>ID: {{tasks.id}}
+        <span>ID: {{task.id}}
         </span>
       </div>
       <div class="name border background">
-        <span>Name: {{tasks.taskName}}
+        <span>Name: {{task.name}}
         </span>
       </div>
       <div class="description border background">
-        <span>Description: {{tasks.description}}
+        <span>Description: {{task.description}}
         </span>
       </div>
+
       <div class="buttons border background">
-      <button class="btn btn-warning margin" (click)="onChange()">change</button>
-      <button class="btn btn-danger margin" (click)="onDelete(tasks)">delete</button>
+      <button class="btn btn-warning margin" (click)="openChange(task)">change</button>
+      <button class="btn btn-danger margin" (click)="remove(task)">delete</button>
       </div>
     </div>
 
   </div>
+</div>
 
-
-
+<div class="create-task-modal" *ngIf="modalOpened" >
+  <div class="layer"></div>
+  <div class="modal-body" >
+    <div class="d-flex justify-content-end">
+      <span (click)="closeModal()">X</span>
+    </div>
+    <div class="form-group">
+      <input type="text"
+             [(ngModel)]="selectedTask.name"
+             placeholder="task name"
+      >
+    </div>
+    <div class="form-group">
+      <input type="text"
+             [(ngModel)]="selectedTask.description"
+             placeholder="description"
+      >
+    </div>
+    <div class="form-group">
+      <button class="makeTask" type="button" (click)="create()"
+      >change task</button>
+    </div>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/user.model";
 import { Task } from "../../models/task.model";
@@ -12,22 +12,25 @@ import { TaskService } from "../../services/task.service";
 })
 
 export class FormComponent implements OnInit {
+  @Output()
+  public onCreate: EventEmitter<Task> = new EventEmitter();
 
-  form: FormGroup;
+  public form: FormGroup;
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      'taskName': new FormControl(null, [Validators.required]),
-      'description': new FormControl(null, [Validators.required])
+      name: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required])
     })
   }
-  onSubmit() {
-    const {taskName, description} = this.form.value;
-    const task = new Task(taskName, description);
-    this.taskService.createNewTask(task)
-      .subscribe(() => {})
 
+  public onSubmit() {
+    const task = this.form.value;
+    if (task.name.trim() && task.description.trim()) {
+      this.onCreate.emit(task);
+      this.form.reset();
+    }
   }
 }

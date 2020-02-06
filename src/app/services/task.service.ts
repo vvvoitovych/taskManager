@@ -7,23 +7,29 @@ import { Task } from "../models/task.model";
 
 @Injectable()
 export class TaskService {
-  constructor(private http: HttpClient) {}
+  private url = 'http://localhost:3001';
+  constructor(private http: HttpClient) {
+  }
 
-  createNewTask(task: Task): Observable<Task> {
-
-    return this.http.post('http://localhost:3000/tasks', task)
+  create(task: Task): Observable<Task> {
+    return this.http.post( `${this.url}/tasks`, task)
       .pipe(map((response: any) => response));
   }
 
-  getTasks(): Observable<Task> {
-    return this.http.get('http://localhost:3000/tasks')
+  fetch(): Observable<Array<Task>> {
+    return this.http.get(`${this.url}/tasks`)
       .pipe(map((response: any) => response))
-      };
+  };
 
-  deleteTask(task: Task) :Observable<{}> {
-    return this.http.delete(`${'http://localhost:3000/tasks'}/${task.id}`)
+  delete(task: Task): Observable<{}> {
+    return this.http.delete(`${this.url}/tasks/${task.id}`)
       .pipe(map((response: any) => response))
   }
 
+  update(task: Task): Observable<Task> {
+    return this.http.put(`${this.url}/tasks/${task.id}`, task)
+      .pipe(map((response: any) => response))
   }
+
+}
 
