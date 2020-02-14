@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/user.model";
 import { Task } from "../../models/task.model";
 import { TaskService } from "../../services/task.service";
+import { UsersService } from "../../services/users.service";
 
 /** @title Simple form field */
 @Component({
@@ -17,7 +18,8 @@ export class FormComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService,
+              private usersService: UsersService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -28,6 +30,7 @@ export class FormComponent implements OnInit {
 
   public onSubmit() {
     const task = this.form.value;
+
     if (task.name.trim() && task.description.trim()) {
       this.onCreate.emit(task);
       this.form.reset();

@@ -3,24 +3,29 @@
   padding: 0;
 }
 .form {
-  max-width: 90%;
+  max-width: 100%;
   min-width: 300px;
-  margin: 50px auto;
-  border: 2px solid black;
-  border-radius: 10px;
-  background: silver;
+  margin: 20px auto;
+  border-bottom: 2px solid black;
+  background: lightgrey;
 }
 .form div{
   padding: 10px;
 }
 .form div input {
-  width: 100%;
+  width: 80%;
   height: 50px;
   display: block;
-  margin-bottom: 15px;
+  margin: 0 auto;
   text-indent: 15px;
   border: 1px solid black;
+  border-radius: 10px;
 }
+input:focus {
+  color: #000000;
+  border: 1px solid #000000
+}
+
 #description {
   height: 100px;
 }

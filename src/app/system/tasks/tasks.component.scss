@@ -3,12 +3,11 @@
   padding: 0;
 }
 .container {
-  max-width: 90%;
+  max-width: 100%;
   min-width: 300px;
-  margin: 50px auto;
-  border: 2px solid black;
-  border-radius: 10px;
-  background: silver;
+  margin: 0 auto;
+  border-bottom: 2px solid black;
+  background: lightgrey;
 }
 .container div {
   padding: 10px;
@@ -17,24 +16,25 @@
 .tasks {
   display: flex;
 }
-.id{
-  width: 10%;
-}
 .name{
   width: 20%;
 }
 .description{
-  width: 60%;
+  flex-grow: 1;
 }
 .buttons {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 10%;
+  flex-wrap: nowrap;
+
+  .btn {
+    padding: 5px;
+  }
 }
-.border{
+.border {
   border: 1px solid black;
+  margin-left: 5px;
 }
 
 .create-task-modal div {
@@ -59,8 +59,7 @@
   display: block;
   margin: auto;
   height: 40px;
-  background: greenyellow;
-  color: #2d672d;
+  background-color: #10a7db;
   font-size: large;
   border: 1px solid darkgreen;
   border-radius: 5px;
@@ -100,12 +99,24 @@
     top: 50%;
     left: 50%;
     z-index: 3;
-    background-color: #a6d5ec;
+    background-color: #9ba8b5;
     padding: 15px;
-    width: 300px;
+    width: 600px;
     max-height: 400px;
     border-radius: 15px;
     border: 1px solid gray;
   }
+
+  .body-share {
+    overflow-x: auto;
+  }
+}
+input:focus {
+  color: #000000;
+  border: 1px solid #000000
 }
 
+
+.checkbox-share {
+  width: 20px;
+}
