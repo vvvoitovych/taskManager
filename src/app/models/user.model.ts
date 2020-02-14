@@ -1,4 +1,6 @@
 export class User {
+  [key: string]: any;
+
   constructor (
     public email: string,
     public password: string,

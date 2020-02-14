@@ -39,17 +39,19 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const formData = this.form.value;
+
     this.usersService.getUserByEmail(formData.email)
       .subscribe((user: User) => {
-
         if(user) {
           if (user.password === formData.password) {
             this.message = '';
             window.localStorage.setItem('user', JSON.stringify(user));
             this.authService.login();
-            this.router.navigate(['/system'])
-          } else { this.message = 'wrong password'}
-          
+            this.router.navigate(['/system']);
+          } else {
+            this.message = 'wrong password'
+          }
+
         } else {
           this.message = 'no user'
         }
